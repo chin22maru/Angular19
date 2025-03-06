@@ -1,0 +1,49 @@
+<div class="row">
+    <div class="col-6 bg-success text-left p-3">
+        <h3>One Way</h3>
+        <div class="row">
+            <div class="col-6 text-left p-3">
+
+                <h5 class="pb-3">From .ts to .html</h5>
+
+                <p>1. Interpolation</p>
+
+                <p>Course Name: {{courseName}}</p>
+
+                <p>2. Property Binding</p>
+
+                <input type="text" placeholder = "{{placeHolder}}" value = "{{courseName}}">
+                <input type="text" [placeholder] = "placeHolder" [value] = "courseName">
+
+            </div>
+
+            <div class="col-6 p-3">
+
+                <h5 class="pb-3">From .html to .ts</h5>
+
+                <p>1. Event Binding</p>
+
+                <button class="btn btn-primary" (click)="showAlertMsg('Alert called from html')">Show Alert</button>
+
+            </div>
+        </div>
+    </div>
+    <div class="col-6 bg-danger text-left p-3">
+
+        <h3 class="mb-3">Two Way</h3>
+
+        <div class="row">
+
+            <input class="mb-3" type="text" placeholder = "{{placeHolder}}" [(ngModel)] = "courseName">
+            
+            <div class="container pb-3">
+                <input class="form-check-input fs-5" type="checkbox" [(ngModel)]="isActive">
+                <label class="form-check-label fs-5">{{ isActive }}</label>
+            </div>
+
+            <select (change) = "onOptionSelected($event)">
+                <option *ngFor="let option of options" [value]="option">{{ option }}</option>
+            </select>
+        </div>
+    </div>
+</div>

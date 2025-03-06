@@ -1,0 +1,242 @@
+<!-- Structural Directives -->
+
+<div class="row">
+    <h4 class="mb-3 text-center text-white bg-dark p-2">Structural Directives</h4>
+    
+    <div class="col-3">
+        <div class="bg-primary p-3" *ngIf = "isDivVisiable">Visibility Check of Div1</div>
+    </div>
+
+    <div class="col-3">
+        <div class="bg-primary p-3" *ngIf = "isDiv2Visiable">Visibility Check of Div2</div>
+    </div>
+
+    <div class="col-3">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <label for="">Select Cast</label>
+                <select class="form-control" [(ngModel)] = "selectedCaste">
+                    <option>General</option>
+                    <option>OBC</option>
+                    <option>SC</option>
+                    <option>ST</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="col-6" *ngIf = "selectedCaste === 'Other'">
+                <label for="">Caste name</label>
+                <input type="text" placeholder="Enter Name Here">
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pt-3">
+    <div class="col-3 text-center">
+        <button class="btn btn-danger mx-3" (click) = "hideDiv()">Hide</button>
+        <button class="btn btn-success mx-3" (click) = "showDiv()">Show</button>
+    </div>
+    
+    <div class="col-3 text-center">
+        <button class="btn btn-danger mx-3" (click) = "showhideDiv2(false)">Hide</button>
+        <button class="btn btn-success mx-3" (click) = "showhideDiv2(true)">Show</button>
+    </div>
+</div>
+
+<div class="row pt-5 ">
+    <div class="col-3 d-flex justify-content-center">
+        <h6 class="mt-4 me-2">City List : </h6>
+        <ul class="mt-4 list-unstyled">
+            <li *ngFor = "let city of cityList">{{city}}</li>
+        </ul>
+    </div>
+
+    <div class="col-3 mt-5 mb-5 d-flex justify-content-center">
+        <select>
+            <option>Select City</option>
+            <option *ngFor = "let city of cityList">{{city}}</option>
+        </select>
+    </div>
+
+    <div class="col-6">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr No </th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Present</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let student of students; let i = index">
+                    <td>{{i+1}}</td>
+                    <td>{{student.name}}</td>
+                    <td>{{student.city}}</td>
+                    <td>
+                        <p class="mb-0" *ngIf = "student.isPresent == true">✅</p>
+                        <p class="mb-0" *ngIf = "student.isPresent == false">❌</p>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- Control Flow Statements - From Angular-17 -->
+
+
+<div class="row">
+    <h4 class="mb-3 text-center text-white bg-dark p-2">Control Flow Statements</h4>
+    
+    <div class="col-3">
+        @if(isDiv3Visiable == true){
+            <div class="bg-primary p-3">Visibility Check of Div3</div>
+        }
+        @else{
+            <div class="bg-secondary p-3">Visibility Check of Div3</div>
+        }
+    </div>
+
+    <div class="col-3">
+        @if(isDiv4Visiable == true){
+            <div class="bg-primary p-3">Visibility Check of Div4</div>
+        }
+    </div>
+
+    <div class="col-3">
+        <div class="row d-flex justify-content-center">
+            <div class="col-6">
+                <label for="">Select Cast</label>
+                <select class="form-control" [(ngModel)] = "selectedCaste2">
+                    <option>General</option>
+                    <option>OBC</option>
+                    <option>SC</option>
+                    <option>ST</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="col-6">
+                @if(selectedCaste2 === 'Other'){
+                    <label for="">Caste name</label>
+                    <input type="text" placeholder="Enter Name Here">
+                }
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row pt-3">
+    <div class="col-3 text-center">
+        <button class="btn btn-danger mx-3" (click) = "hideDiv3()">Hide</button>
+        <button class="btn btn-success mx-3" (click) = "showDiv3()">Show</button>
+    </div>
+    
+    <div class="col-3 text-center">
+        <button class="btn btn-danger mx-3" (click) = "showhideDiv4(false)">Hide</button>
+        <button class="btn btn-success mx-3" (click) = "showhideDiv4(true)">Show</button>
+    </div>
+</div>
+
+<div class="row pt-5 ">
+    <div class="col-3 d-flex justify-content-center">
+        <h6 class="mt-4 me-2">City List2 : </h6>
+        <ul class="mt-4 list-unstyled">
+            @for (city of cityList; track $index) {
+                <li>{{$index+1}}. {{ city }}</li>
+            }            
+        </ul>
+        
+    </div>
+
+    <div class="col-3 mt-5 mb-5 d-flex justify-content-center">
+        <select>
+            <option>Select City2</option>
+            @for (city of cityList; track city){
+                <option>{{city}}</option>
+            }
+        </select>
+    </div>
+
+    <div class="col-6">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <tr>
+                    <th>Sr No </th>
+                    <th>Name</th>
+                    <th>City</th>
+                    <th>Present</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @for(student of students; track $index){
+                    <tr>
+                        <td>{{$index+1}}</td>
+                        <td>{{student.name}}</td>
+                        <td>{{student.city}}</td>
+                        <td>
+                            <p class="mb-0" *ngIf = "student.isPresent == true">✅</p>
+                            <p class="mb-0" *ngIf = "student.isPresent == false">❌</p>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<!-- Attribute Diractives -->
+
+<div class="row">
+    <h4 class="mb-3 text-center text-white bg-dark p-2">Attribute Directives</h4>
+
+    <div class="col-3">
+        <div class="p-3" [ngClass] = "studentClass">
+            Student
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="p-3" [ngClass] = "empClass">
+            Employee
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="p-3" [ngClass] = "isOrderActive ? 'bg-success' : 'bg-danger'">
+            Orders
+        </div>
+    </div>
+
+    <div class="col-3">
+        <div class="p-3" [ngClass] = "productClass">
+            Products
+        </div>
+    </div>
+
+</div>
+
+<div class="row">
+
+    <div class="col-3"></div>
+
+    <div class="col-3 d-flex justify-content-center">
+        <input class="mt-3 text-center" type="text" [(ngModel)] = "empClass">
+    </div>
+
+    <div class="col-3 d-flex justify-content-center">
+        <input class="mt-3 form-check-input fs-5" type="checkbox" [(ngModel)] = "isOrderActive">
+    </div>
+
+    <div class="col-3 mt-3 d-flex justify-content-center">
+        <button class="btn btn-danger mx-3" (click) = "addProductClass('bg-danger')">Red</button>
+        <button class="btn btn-success mx-3" (click) = "addProductClass('bg-success')">Green</button>
+    </div>
+    
+</div>
