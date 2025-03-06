@@ -1,1 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
+
+.form-control,
+.form-select,
+.input-group-text{
+    border: 1px solid gray !important;
+}

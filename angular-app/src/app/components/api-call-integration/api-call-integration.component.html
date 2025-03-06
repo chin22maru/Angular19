@@ -1,0 +1,21 @@
+<p>api-call-integration works!</p>
+
+<button (click) = "getAllUsers()">Get Users</button>
+<button (click) = "getComplaintUsers()">Get Users</button>
+
+<div class="row mt-3">
+    <div class="col-3">
+        <ul>
+            @for (user of jsonUsers; track $index){
+                <li>{{user.username}}</li>
+            }
+        </ul>
+    </div>
+    <div class="col-3">
+        <ul>
+            @for (user of compUsers; track $index){
+                <li>{{user.userName}}</li>
+            }
+        </ul>
+    </div>
+</div>
