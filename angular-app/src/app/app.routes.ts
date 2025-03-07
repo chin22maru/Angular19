@@ -7,38 +7,57 @@ import { ApiCallIntegrationComponent } from './components/api-call-integration/a
 import { UserComponent } from './components/user/user.component';
 import { UserReactiveFormComponent } from './components/user-reactive-form/user-reactive-form.component';
 import { ResourceApiComponent } from './components/resource-api/resource-api.component';
+import { LoginComponent } from './components/login/login.component';
+import { LayoutComponent } from './components/layout/layout.component';
 
 export const routes: Routes = [
     {
-        path: 'variables',
-        component: VariablesComponent
+        path: '',
+        redirectTo: 'login',
+        pathMatch: 'full',
     },
     {
-        path: 'data-bindings',
-        component: DataBindingComponent
+        path: 'login',
+        component: LoginComponent,
     },
     {
-        path: 'directives',
-        component: DirectivesComponent
-    },
-    {
-        path: 'template-form',
-        component: TemplateFormComponent
-    },
-    {
-        path: 'api-call-integration',
-        component: ApiCallIntegrationComponent
-    },
-    {
-        path: 'user',
-        component: UserComponent
-    },
-    {
-        path: 'user-reactive-form',
-        component: UserReactiveFormComponent
-    },
-    {
-        path: 'resource-api',
-        component: ResourceApiComponent
+        path: '',
+        component: LayoutComponent,
+        children: [
+
+            {
+                path: 'variables',
+                component: VariablesComponent
+            },
+            {
+                path: 'data-bindings',
+                component: DataBindingComponent
+            },
+            {
+                path: 'directives',
+                component: DirectivesComponent
+            },
+            {
+                path: 'template-form',
+                component: TemplateFormComponent
+            },
+            {
+                path: 'api-call-integration',
+                component: ApiCallIntegrationComponent
+            },
+            {
+                path: 'user',
+                component: UserComponent
+            },
+            {
+                path: 'user-reactive-form',
+                component: UserReactiveFormComponent
+            },
+            {
+                path: 'resource-api',
+                component: ResourceApiComponent
+            },
+
+        ]
     },
 ];
