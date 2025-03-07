@@ -9,6 +9,7 @@ import { UserReactiveFormComponent } from './components/user-reactive-form/user-
 import { ResourceApiComponent } from './components/resource-api/resource-api.component';
 import { LoginComponent } from './components/login/login.component';
 import { LayoutComponent } from './components/layout/layout.component';
+import { checkLoginGuard } from './guard/check-login.guard';
 
 export const routes: Routes = [
     {
@@ -23,6 +24,7 @@ export const routes: Routes = [
     {
         path: '',
         component: LayoutComponent,
+        canActivate: [checkLoginGuard],
         children: [
 
             {
@@ -35,7 +37,8 @@ export const routes: Routes = [
             },
             {
                 path: 'directives',
-                component: DirectivesComponent
+                component: DirectivesComponent,
+                canActivate: [checkLoginGuard],
             },
             {
                 path: 'template-form',
