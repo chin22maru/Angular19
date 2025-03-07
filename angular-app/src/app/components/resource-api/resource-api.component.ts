@@ -1,10 +1,11 @@
+import { DatePipe, JsonPipe, LowerCasePipe, UpperCasePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { Component, resource, inject} from '@angular/core';
 import { rxResource } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-resource-api',
-  imports: [],
+  imports: [UpperCasePipe, LowerCasePipe, DatePipe, JsonPipe],
   templateUrl: './resource-api.component.html',
   styleUrl: './resource-api.component.css'
 })
@@ -28,5 +29,11 @@ export class ResourceApiComponent {
     }
   });
   
-  
+  curdate = new Date();
+
+  obj = {
+    name: "chintan",
+    age: 21,
+    city: "bhavnagar"
+  }
 }

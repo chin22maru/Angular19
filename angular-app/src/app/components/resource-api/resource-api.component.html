@@ -3,7 +3,7 @@
         <h5 class = "mb-3 text-center">Name</h5>
         @if(users.hasValue()){
             @for(user of users.value(); track user){
-                <p class="text-center">{{user.name}}</p>
+                <p class="text-center">{{user.name | lowercase}}</p>
             }
         }
         @else{
@@ -16,11 +16,29 @@
 
         @if(users2.hasValue()){
             @for(user of users2.value(); track user){
-                <p class="text-center">{{user.username}}</p>
+                <p class="text-center">{{user.username | uppercase}}</p>
             }
         }
         @else{
             <p>No Users</p>
         }
+    </div>
+
+    <div class="col-4">
+        <div class="row">
+            <h5 class = "mb-3 text-center">Date Pipe</h5>
+            <p class="text-center">{{curdate}}</p>
+            <p class="text-center">{{curdate | date}}</p>
+            <p class="text-center">{{curdate | date:'dd-MMMM-yyyy'}}</p>
+            <p class="text-center">{{curdate | date:'dd-MMM-yyyy'}}</p>
+            <p class="text-center">{{curdate | date:'dd-MMM-yy'}}</p>
+            <p class="text-center">{{curdate | date:'dd-MM-yy'}}</p>
+        </div>
+
+        <div class="row mt-3">
+            <h5 class = "mb-4 text-center">Json Pipe</h5>
+            <p class="text-center">{{obj}}</p>
+            <p class="text-center">{{obj | json}}</p>
+        </div>
     </div>
 </div>
