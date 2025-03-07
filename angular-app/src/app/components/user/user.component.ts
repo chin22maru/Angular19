@@ -27,11 +27,28 @@ export class UserComponent {
 
 
 
-  selectedUser: any = null;
+  selectedUser: any = {
+      "userId": '',
+      "userName": "",
+      "emailId": "",
+      "fullName": "",
+      "role": "",
+      "createdDate": new Date(),
+      "password": "",
+      "projectName": "",
+      "refreshToken": "",
+      "refreshTokenExpiryTime": new Date()
+  };
+
   isSidePanelOpen = false;
 
   openForm(user: any = null) {
-    this.selectedUser = user ? { ...user } : { userId: 0, userName: '', password: '', emailId: '', fullName: '', role: '' };
+    if(user){
+      this.selectedUser = {...user};
+    }
+    else{
+      this.selectedUser.userId = 0; 
+    }
     this.isSidePanelOpen = true;
   }
 
@@ -41,16 +58,20 @@ export class UserComponent {
 
   saveUser() {
     if (this.selectedUser.userId === 0) {
-      this.selectedUser.userId = this.users.length + 1;
-      this.users.push(this.selectedUser);
+      this.http.post("https://projectapi.gerasim.in/api/Complaint/AddNewUser",this.selectedUser).subscribe((res:any) => {
+        this.getUsers();
+      })
     } else {
-      const index = this.users.findIndex(u => u.userId === this.selectedUser.userId);
-      this.users[index] = this.selectedUser;
+      this.http.post("https://projectapi.gerasim.in/api/Complaint/UpdateUser",this.selectedUser).subscribe((res:any) => {
+        this.getUsers();
+      })
     }
     this.closeForm();
   }
 
   deleteUser(userId: number) {
-    this.users = this.users.filter(user => user.userId !== userId);
+    this.http.delete("https://projectapi.gerasim.in/api/Complaint/DeleteUserByUserId?userId="+userId).subscribe((res:any) => {
+      this.getUsers();
+    })
   }
 }
