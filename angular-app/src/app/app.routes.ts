@@ -5,6 +5,8 @@ import { VariablesComponent } from './components/variables/variables.component';
 import { TemplateFormComponent } from './components/template-form/template-form.component';
 import { ApiCallIntegrationComponent } from './components/api-call-integration/api-call-integration.component';
 import { UserComponent } from './components/user/user.component';
+import { UserReactiveFormComponent } from './components/user-reactive-form/user-reactive-form.component';
+import { ResourceApiComponent } from './components/resource-api/resource-api.component';
 
 export const routes: Routes = [
     {
@@ -30,5 +32,13 @@ export const routes: Routes = [
     {
         path: 'user',
         component: UserComponent
-    }
+    },
+    {
+        path: 'user-reactive-form',
+        component: UserReactiveFormComponent
+    },
+    {
+        path: 'resource-api',
+        component: ResourceApiComponent
+    },
 ];

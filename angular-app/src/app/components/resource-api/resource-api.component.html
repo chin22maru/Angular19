@@ -1,0 +1,26 @@
+<div class="row d-flex justify-content-center">
+    <div class="col-3">
+        <h5 class = "mb-3 text-center">Name</h5>
+        @if(users.hasValue()){
+            @for(user of users.value(); track user){
+                <p class="text-center">{{user.name}}</p>
+            }
+        }
+        @else{
+            <p>No Users</p>
+        }
+    </div>
+
+    <div class="col-3">
+        <h5 class = "mb-3 text-center">Username</h5>
+
+        @if(users2.hasValue()){
+            @for(user of users2.value(); track user){
+                <p class="text-center">{{user.username}}</p>
+            }
+        }
+        @else{
+            <p>No Users</p>
+        }
+    </div>
+</div>

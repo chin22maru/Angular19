@@ -24,22 +24,8 @@ export class UserComponent {
     })
   }
 
-
-
-
-  selectedUser: any = {
-      "userId": '',
-      "userName": "",
-      "emailId": "",
-      "fullName": "",
-      "role": "",
-      "createdDate": new Date(),
-      "password": "",
-      "projectName": "",
-      "refreshToken": "",
-      "refreshTokenExpiryTime": new Date()
-  };
-
+  selectedUser: any = {};
+  
   isSidePanelOpen = false;
 
   openForm(user: any = null) {
@@ -47,7 +33,18 @@ export class UserComponent {
       this.selectedUser = {...user};
     }
     else{
-      this.selectedUser.userId = 0; 
+      this.selectedUser = {  // Reset all fields for new user
+        userId: 0,
+        userName: "",
+        emailId: "",
+        fullName: "",
+        role: "",
+        createdDate: new Date(),
+        password: "",
+        projectName: "",
+        refreshToken: "",
+        refreshTokenExpiryTime: new Date()
+      };
     }
     this.isSidePanelOpen = true;
   }
@@ -57,21 +54,35 @@ export class UserComponent {
   }
 
   saveUser() {
+    console.log("Saving user with role:", this.selectedUser.role); // Debugging log
+  
+    if (!this.selectedUser.role) {
+      alert("Please select a role before saving.");
+      return;
+    }
+  
     if (this.selectedUser.userId === 0) {
-      this.http.post("https://projectapi.gerasim.in/api/Complaint/AddNewUser",this.selectedUser).subscribe((res:any) => {
+      this.http.post("https://projectapi.gerasim.in/api/Complaint/AddNewUser", this.selectedUser).subscribe((res: any) => {
+        console.log("Response from add user:", res); // Debugging log
         this.getUsers();
-      })
+      });
     } else {
-      this.http.post("https://projectapi.gerasim.in/api/Complaint/UpdateUser",this.selectedUser).subscribe((res:any) => {
+      this.http.post("https://projectapi.gerasim.in/api/Complaint/UpdateUser", this.selectedUser).subscribe((res: any) => {
+        console.log("Response from update user:", res); // Debugging log
+        this.getUsers();
+      });
+    }
+  
+    this.closeForm();
+  }
+  
+
+  deleteUser(userId: number) {
+    const isConfirm = confirm("Are you sure want to delete?");
+    if(isConfirm){
+      this.http.delete("https://projectapi.gerasim.in/api/Complaint/DeleteUserByUserId?userId="+userId).subscribe((res:any) => {
         this.getUsers();
       })
     }
-    this.closeForm();
-  }
-
-  deleteUser(userId: number) {
-    this.http.delete("https://projectapi.gerasim.in/api/Complaint/DeleteUserByUserId?userId="+userId).subscribe((res:any) => {
-      this.getUsers();
-    })
   }
 }

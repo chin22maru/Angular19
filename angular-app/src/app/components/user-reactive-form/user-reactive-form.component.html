@@ -1,0 +1,93 @@
+<div class="container mt-4">
+    <div class="row">
+      <!-- User List -->
+      <div [ngClass]="{ 'col-12': !isSidePanelOpen, 'col-9': isSidePanelOpen }">
+        <h4>User List</h4>
+        <button class="btn btn-primary mb-3" (click)="openForm()">+ Add User</button>
+        <table class="table table-bordered table-striped table-fixed">
+          <thead class="table-dark">
+            <tr>
+              <th>ID</th>
+              <th>Username</th>
+              <th>Password</th>
+              <th>Email</th>
+              <th>Full Name</th>
+              <th>Role</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users; let i = index">
+              <td>{{ i+1 }}</td>
+              <td>{{ user.userName }}</td>
+              <td>{{ user.password }}</td>
+              <td>{{ user.emailId }}</td>
+              <td>{{ user.fullName }}</td>
+              <td>{{ user.role }}</td>
+              <td>
+                <button class="btn btn-sm btn-warning me-1" (click)="openForm(user)">Edit</button>
+                <button class="btn btn-sm btn-danger" (click)="deleteUser(user.userId)">Delete</button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+  
+      <!-- Side Panel Form -->
+      <div class="col-3 mt-5" *ngIf="isSidePanelOpen">
+        <div class="card shadow-lg">
+          <div class="card-header bg-primary text-white">
+            <h5 class="mb-0">{{ userForm.value.userId === 0 ? 'Add User' : 'Edit User' }}</h5>
+          </div>
+          <div class="card-body">
+            <form [formGroup]="userForm">
+              
+              <div class="mb-2">
+                <label>Username:</label>
+                <input type="text" class="form-control" formControlName="userName">
+
+                <small class="text-danger" *ngIf="userForm.get('userName')?.errors?.['required'] && userForm.get('userName')?.touched">
+                    Username is required
+                </small>
+                <small class="text-danger" *ngIf="userForm.get('userName')?.errors?.['minlength'] && userForm.get('userName')?.touched">
+                    Username must be at least 5 characters long
+                </small> 
+
+              </div>
+
+              <div class="mb-2">
+                <label>Password:</label>
+                <input type="password" class="form-control" formControlName="password">
+                <small class="text-danger" *ngIf="userForm.get('password')?.invalid && userForm.get('password')?.touched">
+                  Password is required
+                </small>
+              </div>
+
+              <div class="mb-2">
+                <label>Email:</label>
+                <input type="email" class="form-control" formControlName="emailId">
+                <small class="text-danger" *ngIf="userForm.get('emailId')?.invalid && userForm.get('emailId')?.touched">
+                  Valid Email is required
+                </small>
+              </div>
+              <div class="mb-2">
+                <label>Full Name:</label>
+                <input type="text" class="form-control" formControlName="fullName">
+              </div>
+              <div class="mb-2">
+                <label>Role:</label>
+                <select class="form-select" formControlName="role">
+                  <option value="Admin">Admin</option>
+                  <option value="User">User</option>
+                </select>
+              </div>
+              <div class="d-flex justify-content-between">
+                <button class="btn btn-success" [disabled]="userForm.invalid" (click)="saveUser()">Save</button>
+                <button class="btn btn-secondary" (click)="closeForm()">Cancel</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>

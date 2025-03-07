@@ -40,25 +40,42 @@
             <h5 class="mb-0">{{ selectedUser?.userId === 0 ? 'Add User' : 'Edit User' }}</h5>
           </div>
           <div class="card-body">
+
             <div class="mb-2">
               <label>Username:</label>
-              <input type="text" class="form-control" [(ngModel)]="selectedUser.userName">
+              <!-- Correcting the validation using template reference variable -->
+              <input type="text" class="form-control" name="userName" required minlength="3" #uname="ngModel" [(ngModel)]="selectedUser.userName">
+              
+              <!-- Validation messages -->
+              @if (uname.touched || uname.dirty) {
+                <!-- Required Error -->
+                @if (uname.errors?.['required']) {
+                  <small class="text-danger">Username is Required</small>
+                }
+                
+                <!-- Minlength Error -->
+                @if (uname.errors?.['minlength']) {
+                  <small class="text-danger">Username must be at least 3 characters long</small>
+                }
+              }
             </div>
+            
+
             <div class="mb-2">
               <label>Password:</label>
-              <input type="password" class="form-control" [(ngModel)]="selectedUser.password">
+              <input type="password" class="form-control" name="password" [(ngModel)]="selectedUser.password">
             </div>
             <div class="mb-2">
               <label>Email:</label>
-              <input type="email" class="form-control" [(ngModel)]="selectedUser.emailId">
+              <input type="email" class="form-control" name="emailId" [(ngModel)]="selectedUser.emailId">
             </div>
             <div class="mb-2">
               <label>Full Name:</label>
-              <input type="text" class="form-control" [(ngModel)]="selectedUser.fullName">
+              <input type="text" class="form-control" name="fullName" [(ngModel)]="selectedUser.fullName">
             </div>
             <div class="mb-2">
               <label>Role:</label>
-              <select class="form-select" [(ngModel)]="selectedUser.role">
+              <select class="form-select" name="role" [(ngModel)]="selectedUser.role">
                 <option value="Admin">Admin</option>
                 <option value="User">User</option>
               </select>
