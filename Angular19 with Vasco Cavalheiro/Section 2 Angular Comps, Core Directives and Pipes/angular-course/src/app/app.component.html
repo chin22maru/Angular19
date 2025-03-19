@@ -8,8 +8,35 @@
 
 <div class="courses">
 
-    <course-card></course-card>
-    <course-card></course-card>
+    <course-card 
+            *ngFor="let course of courses; index as i; first as f; last as l; odd as o; even as e"
+            (courseSelected)="onCourseSelected($event)" 
+            [course]="course" 
+            [Index]="i+1"
+            [class.is-first]="f"
+            [class.is-last]="l"
+            [class.is-odd]="o"
+            [class.is-even]="e"
+    />
+
+    <!-- @for (course of courses; 
+            track course.id; 
+            let Index=$index; 
+            let first=$first;
+            let last=$last;
+            let odd=$odd;
+            let even=$even;
+    ) { -->
+        <!-- <h1>{{$count}}</h1> no need to initialize you can direct use also -->
+        <!-- <course-card 
+            (courseSelected)="onCourseSelected($event)" 
+            [course]="course" 
+            [Index]="Index"
+        />
+    }
+    @empty {
+        <h1>No Courses Fround!</h1>
+    } -->
 
 </div>
 
