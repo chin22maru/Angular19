@@ -9,8 +9,7 @@ import { Course } from './model/course';
     standalone: false
 })
 export class AppComponent {
-    core = COURSES[0]
-    rxjs = COURSES[1]
+    courses = [...COURSES]
 
     bubbledUpClickButton(){
         console.log('button clicked event bubble up to parent as normal browser event')
