@@ -3,8 +3,18 @@
     <div class="course-title">
         {{Index}}. {{course.description}}
     </div>
-    <img width="300" alt="Angular Logo"
-         [src]="course.iconUrl">
+
+    <!-- @if(course.iconUrl){
+        <img width="300" alt="Angular Logo" [src]="course.iconUrl">
+    } @else {
+        <h2>Image not available!</h2>
+    } -->
+
+    <img width="300" alt="Angular Logo" *ngIf="course.iconUrl; else noImg" [src]="course.iconUrl" >
+    <ng-template #noImg>
+        <h2>Image not available!</h2>
+    </ng-template>
+
 
     <div class="course-description">
         {{course.longDescription}}
