@@ -8,8 +8,8 @@
 
 <div class="courses">
 
-    <course-card></course-card>
-    <course-card></course-card>
+    <course-card (click)="bubbledUpClickButton()" [course]="core"></course-card>
+    <course-card (courseSelected)="onCourseSelected($event)" [course]="rxjs"></course-card>
 
 </div>
 

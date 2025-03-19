@@ -12,9 +12,11 @@ import { CourseCardComponent } from './course-card/course-card.component';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    CourseCardComponent
+    CourseCardComponent,
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { 
+  
+}
