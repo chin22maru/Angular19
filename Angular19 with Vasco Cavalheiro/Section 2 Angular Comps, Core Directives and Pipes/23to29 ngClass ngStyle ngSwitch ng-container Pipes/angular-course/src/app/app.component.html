@@ -1,0 +1,40 @@
+<div class="top-menu">
+
+    <img class="logo"
+         src="https://angular-academy.s3.amazonaws.com/main-logo/main-page-logo-small-hat.png">
+
+</div>
+
+<div>
+    <p>{{curDate}}</p>
+    <p>{{curDate | date}}</p>
+    <p>{{curDate | date: 'MM:dd:yyyy'}}</p>
+    <p>{{curDate | date: 'MMM:dd:yyyy'}}</p>
+    <p>------------------------------------------</p>
+    <p>{{title}}</p>
+    <p>{{title | uppercase}}</p>
+    <p>{{title | lowercase}}</p>
+    <p>------------------------------------------</p>
+    <p>{{price}}</p>
+    <p>{{price | number:'3.3-5'}}</p>
+    <p>{{price | currency}}</p>
+    <p>{{price | currency:'EUR'}}</p>
+    <p>{{price | percent}}</p>
+    <p>------------------------------------------</p>
+    <div *ngFor="let pair of courses[0] | keyvalue">
+        {{pair.key + ": " + pair.value}}
+    </div>
+</div>
+
+<div class="courses">
+
+    <course-card 
+            *ngFor="let course of courses | slice: 0:5 ; index as i; first as f; last as l; odd as o; even as e"
+            (courseSelected)="onCourseSelected($event)" 
+            [course]="course" 
+            [Index]="i+1"
+    />
+
+</div>
+
+
