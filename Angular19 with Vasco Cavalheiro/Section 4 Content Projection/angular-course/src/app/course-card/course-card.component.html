@@ -1,0 +1,24 @@
+<div class='course-card ' *ngIf="course">
+
+    <div class="course-title">
+        {{course.description}}
+    </div>
+
+    <ng-content select="img"></ng-content>
+    <ng-content select=".eleH4"></ng-content>
+    <ng-content></ng-content>
+
+    <div class="course-description">
+        {{course.longDescription}}
+    </div>
+
+    <div class="course-category" [ngSwitch]="course.category">
+        <div class="category" *ngSwitchCase="'BEGINNER'">Beginner</div>
+        <div class="category" *ngSwitchCase="'INTERMEDIATE'">Intermediate</div>
+        <div class="category" *ngSwitchCase="'ADVANCED'">Advanced</div>
+        <div class="category" *ngSwitchDefault>All levels</div>
+    </div>
+
+    <button (click)="onClickViewCourse()">View Course</button>
+
+</div>
